@@ -1,0 +1,1416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel>
+<schema name="public" rect-visible="true" fill-color="#e1e1e1">
+</schema>
+
+<schema name="Sociografia" fill-color="#ffff7f">
+	<comment><![CDATA[Software Social]]></comment>
+</schema>
+
+<database name="novo_banco_de_dados" encoding="UTF8">
+</database>
+
+<table name="operador" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="429" y="374.5"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="usuario" not-null="true">
+		<type name="varchar" length="15"/>
+	</column>
+	<column name="nivel_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="profissao_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="email">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="cpf" not-null="true">
+		<type name="varchar" length="15"/>
+	</column>
+	<column name="rg">
+		<type name="varchar" length="13"/>
+	</column>
+	<constraint name="operador_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.operador">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="nivel" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="437.75" y="29.25"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="tipo" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="nivel_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.nivel">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="operador_has_one_nivel"
+	 type="rel11"
+	 src-required="false" dst-required="false"
+	 auto-sufix="true"
+	 table-name="operador_has_one_nivel"
+	 src-table="&quot;Sociografia&quot;.nivel"
+	 dst-table="&quot;Sociografia&quot;.operador"/>
+
+<table name="profissao" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="683.5" y="29.25"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nm_trabalho" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="profissao_id_pk" type="pk-constr" factor="100" table="&quot;Sociografia&quot;.profissao">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="operador_has_one_profissao"
+	 type="rel11"
+	 src-required="false" dst-required="false"
+	 auto-sufix="true"
+	 table-name="operador_has_one_profissao"
+	 src-table="&quot;Sociografia&quot;.profissao"
+	 dst-table="&quot;Sociografia&quot;.operador"/>
+
+<table name="telefone" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="26.4999" y="29.75"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="tipo_telefone" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="num_telefone">
+		<type name="varchar" length="14"/>
+	</column>
+	<column name="operador_id">
+		<type name="integer"/>
+	</column>
+	<column name="fornecedor_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="telefone_id_pk" type="pk-constr" factor="100" table="&quot;Sociografia&quot;.telefone">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="operador_has_many_telefone"
+	 type="rel1n"
+	 src-required="false" dst-required="false"
+	 auto-sufix="true"
+	 table-name="operador_has_many_telefone"
+	 src-table="&quot;Sociografia&quot;.operador"
+	 dst-table="&quot;Sociografia&quot;.telefone"/>
+
+<table name="fornecedor" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="28" y="340.25"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="tipo_entidade" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="nm_fantasia" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="razao_social">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="cnpj" not-null="true">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="inscricao_estadual">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="email">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="fornecedor_id_pk" type="pk-constr" factor="100" table="&quot;Sociografia&quot;.fornecedor">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="endereco" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="54.2499" y="826.25"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="tipo_logradouro" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="logradouro" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="numero">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="complemento">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="bairro">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="uf">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="municipio">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="cep">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="referencia">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="fornecedor_id">
+		<type name="integer"/>
+	</column>
+	<column name="latitude">
+		<type name="double precision"/>
+	</column>
+	<column name="longitude">
+		<type name="double precision"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="familia_id">
+		<type name="integer"/>
+	</column>
+	<column name="unidade_id">
+		<type name="integer"/>
+	</column>
+	<column name="id_imovel" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="local_referenciamento_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="endereco_id_pk" type="pk-constr" factor="100" table="&quot;Sociografia&quot;.endereco">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="fornecedor_has_many_telefone"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="fornecedor_has_many_telefone"
+	 src-table="&quot;Sociografia&quot;.fornecedor"
+	 dst-table="&quot;Sociografia&quot;.telefone"/>
+
+<relationship name="fornecedor_has_many_endereco"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="fornecedor_has_many_endereco"
+	 src-table="&quot;Sociografia&quot;.fornecedor"
+	 dst-table="&quot;Sociografia&quot;.endereco"/>
+
+<table name="individuo" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1577" y="304.75"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="apelido">
+		<type name="varchar" length="80"/>
+	</column>
+	<column name="idade">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="sexo">
+		<type name="varchar" length="2"/>
+	</column>
+	<column name="etnia">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="estado_civil">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="nome_mae">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="nome_pai">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="responsavel">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="grau_parentesco">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="deficiente" not-null="true">
+		<type name="char" length="3"/>
+	</column>
+	<column name="tipo_deficiencia">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="situacao_rua">
+		<type name="boolean"/>
+	</column>
+	<column name="familia_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="individuo_id_pk" type="pk-constr" factor="100" table="&quot;Sociografia&quot;.individuo">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="origem" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2277" y="202.5"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="estado" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="cidade" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="chegada">
+		<type name="date"/>
+	</column>
+	<column name="saida">
+		<type name="date"/>
+	</column>
+	<column name="reside" not-null="true">
+		<type name="boolean"/>
+	</column>
+	<column name="individuo_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="origem_id_pk" type="pk-constr" factor="100" table="&quot;Sociografia&quot;.origem">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="origem_has_one_individuo"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="origem_has_one_individuo"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.origem"/>
+
+<table name="unidade" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1058.5" y="396"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="operado_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="unidade_id_pk" type="pk-constr" factor="100" table="&quot;Sociografia&quot;.unidade">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="unidade_has_one_operador"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="unidade_has_one_operador"
+	 src-table="&quot;Sociografia&quot;.operador"
+	 dst-table="&quot;Sociografia&quot;.unidade"/>
+
+<relationship name="individuo_has_one_unidade"
+	 type="rel11"
+	 src-required="false" dst-required="true"
+	 auto-sufix="true"
+	 table-name="individuo_has_one_unidade"
+	 src-table="&quot;Sociografia&quot;.unidade"
+	 dst-table="&quot;Sociografia&quot;.individuo"/>
+
+<table name="processo" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1046.96" y="25.214"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="unidade_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="profissional_id" not-null="true">
+		<type name="integer"/>
+		<comment><![CDATA[quem fez o atendimento]]></comment>
+	</column>
+	<column name="data_abertura">
+		<type name="date"/>
+	</column>
+	<column name="boletim_ocorrencia" not-null="true">
+		<type name="boolean"/>
+	</column>
+	<column name="acompanhamento_judicial" not-null="true">
+		<type name="boolean"/>
+	</column>
+	<column name="arquivar">
+		<type name="boolean"/>
+	</column>
+</table>
+
+<relationship name="unidade_has_many_processo"
+	 type="rel1n"
+	 src-required="false" dst-required="false"
+	 auto-sufix="true"
+	 table-name="unidade_has_many_processo"
+	 src-table="&quot;Sociografia&quot;.unidade"
+	 dst-table="&quot;Sociografia&quot;.processo"/>
+
+<relationship name="operador_has_many_processo"
+	 type="rel1n"
+	 src-required="false" dst-required="false"
+	 auto-sufix="true"
+	 table-name="operador_has_many_processo"
+	 src-table="&quot;Sociografia&quot;.operador"
+	 dst-table="&quot;Sociografia&quot;.processo"/>
+
+<table name="atendimento_especial" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1393" y="29"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="unidade_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="profissional_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="data_atendimento">
+		<type name="date"/>
+	</column>
+	<column name="tipo" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="acao_realizada" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="parecer" not-null="true">
+		<type name="text"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="atendimento_especial_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.atendimento_especial">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="atendimento_especial_has_one_unidade"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="atendimento_especial_has_one_unidade"
+	 src-table="&quot;Sociografia&quot;.unidade"
+	 dst-table="&quot;Sociografia&quot;.atendimento_especial"/>
+
+<relationship name="individuo_has_many_atendimento_especial"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_atendimento_especial"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.atendimento_especial"/>
+
+<relationship name="operador_has_many_atendimento_especial"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="operador_has_many_atendimento_especial"
+	 src-table="&quot;Sociografia&quot;.operador"
+	 dst-table="&quot;Sociografia&quot;.atendimento_especial"/>
+
+<table name="documentos" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2231.04" y="398.289"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="tipo" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="numero">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="serie">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="data_emissao">
+		<type name="date"/>
+	</column>
+	<column name="uf_emissao">
+		<type name="varchar" length="2"/>
+	</column>
+	<column name="cidade">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="orgao_emissor">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="zona">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="secao">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="individuo_id">
+		<type name="integer"/>
+	</column>
+	<column name="categoria">
+		<type name="varchar" length="10"/>
+	</column>
+	<column name="validade">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="status">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="documentos_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.documentos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="certidao" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1485.64" y="1421.25"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="tipo_certidao" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="num_termo" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="num_livro" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="num_folha" not-null="true">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="dt_reg_certidao">
+		<type name="date"/>
+	</column>
+	<column name="estado">
+		<type name="varchar" length="2"/>
+	</column>
+	<column name="cidade">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="nm_cartorio" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="cd_cartorio">
+		<type name="varchar" length="30"/>
+	</column>
+	<column name="individuo_id">
+		<type name="integer"/>
+	</column>
+	<constraint name="certidao_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.certidao">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="individuo_has_many_documentos"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_documentos"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.documentos"/>
+
+<relationship name="individuo_has_many_certidao"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_certidao"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.certidao"/>
+
+<table name="escolaridade" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2194.54" y="923.619"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="le_escreve">
+		<type name="boolean"/>
+	</column>
+	<column name="frequenta">
+		<type name="boolean"/>
+	</column>
+	<column name="grau_escolaridade" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="curso">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="unidade_educacional">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="id_individuo" not-null="true">
+		<type name="integer"/>
+	</column>
+</table>
+
+<relationship name="escolaridade_has_one_individuo"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="escolaridade_has_one_individuo"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.escolaridade"/>
+
+<table name="rendimentos" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2193.54" y="718.983"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="id_individuo" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="afastado">
+		<type name="boolean"/>
+	</column>
+	<column name="remuneracao">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="trabalhou_12meses">
+		<type name="boolean"/>
+	</column>
+	<column name="remuneracao_bruta_total">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="trabalho_remunerado">
+		<type name="boolean"/>
+	</column>
+</table>
+
+<relationship name="individuo_has_many_rendimentos"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_rendimentos"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.rendimentos"/>
+
+<table name="familia" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="575" y="889"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="unidade_social_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="codigo_local">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="eas_ms">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="codigo_eas">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="codigo_familiar_cadunico">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="internacoes_criancas">
+		<type name="integer"/>
+	</column>
+	<column name="internacoes_jovens">
+		<type name="integer"/>
+	</column>
+	<column name="internacoes_idosos">
+		<type name="integer"/>
+	</column>
+	<column name="origem">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="familia_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.familia">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="familia_has_one_unidade"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="familia_has_one_unidade"
+	 src-table="&quot;Sociografia&quot;.unidade"
+	 dst-table="&quot;Sociografia&quot;.familia"/>
+
+<relationship name="endereco_has_one_unidade"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="endereco_has_one_unidade"
+	 src-table="&quot;Sociografia&quot;.unidade"
+	 dst-table="&quot;Sociografia&quot;.endereco"/>
+
+<relationship name="endereco_has_one_familia"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="endereco_has_one_familia"
+	 src-table="&quot;Sociografia&quot;.familia"
+	 dst-table="&quot;Sociografia&quot;.endereco"/>
+
+<relationship name="individuo_has_one_familia"
+	 type="rel11"
+	 src-required="false" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_one_familia"
+	 src-table="&quot;Sociografia&quot;.familia"
+	 dst-table="&quot;Sociografia&quot;.individuo"/>
+
+<table name="imovel" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="113.807" y="1212.49"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="tipo_imovel">
+		<type name="varchar" length="60"/>
+	</column>
+	<column name="situacao_imovel">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="valor_aluguel">
+		<type name="decimal" length="10" precision="2"/>
+	</column>
+	<column name="tipo_propriedade">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="construcao">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="localidade">
+		<type name="varchar" length="255"/>
+	</column>
+	<constraint name="id_imovel_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.imovel">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="endereco_has_one_imovel"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="endereco_has_one_imovel"
+	 src-table="&quot;Sociografia&quot;.imovel"
+	 dst-table="&quot;Sociografia&quot;.endereco"/>
+
+<table name="composicao_imovel" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="11.5789" y="1482.11"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="imovel_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="material_parede" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="especifique_parede">
+		<type name="text"/>
+	</column>
+	<column name="material_piso">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="especifique_piso">
+		<type name="text"/>
+	</column>
+	<column name="material_cobertura">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="especifique_cobertura">
+		<type name="text"/>
+	</column>
+	<column name="num_comodos">
+		<type name="integer"/>
+	</column>
+	<column name="num_salas">
+		<type name="integer"/>
+	</column>
+	<column name="num_cozinha">
+		<type name="integer"/>
+	</column>
+	<column name="num_quartos">
+		<type name="integer"/>
+	</column>
+	<column name="num_banheiros">
+		<type name="integer"/>
+	</column>
+	<column name="num_areas_servicos">
+		<type name="integer"/>
+	</column>
+	<column name="num_anexos">
+		<type name="integer"/>
+	</column>
+	<column name="num_outros_comodos">
+		<type name="integer"/>
+	</column>
+	<column name="num_servem_dormitorio">
+		<type name="integer"/>
+	</column>
+	<constraint name="id_composicao_imovel_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.composicao_imovel">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="composicao_imovel_has_one_imovel"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="composicao_imovel_has_one_imovel"
+	 src-table="&quot;Sociografia&quot;.imovel"
+	 dst-table="&quot;Sociografia&quot;.composicao_imovel"/>
+
+<table name="servicos_imovel" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="346.763" y="1739.79"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="imovel_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="existe_pavimentacao">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="iluminacao_utilizada">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="abastecimento_agua">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="tratamento_agua">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="agua_encanada">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="existe_banheiro">
+		<type name="char" length="3"/>
+	</column>
+	<column name="escoamento_sanitario">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="tratamento_lixo">
+		<type name="varchar" length="45"/>
+	</column>
+	<column name="presenca_animais">
+		<type name="varchar" length="45"/>
+	</column>
+	<constraint name="id_servicos_imovel_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.servicos_imovel">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="servicos_imovel_has_one_imovel"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="servicos_imovel_has_one_imovel"
+	 src-table="&quot;Sociografia&quot;.imovel"
+	 dst-table="&quot;Sociografia&quot;.servicos_imovel"/>
+
+<table name="situacao_habitacional" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="680.658" y="1732"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="imovel_id">
+		<type name="integer"/>
+	</column>
+	<column name="num_pessoas_imovel" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="num_familias_imovel" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="id_situacao_imovel_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.situacao_habitacional">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="situacao_habitacional_has_one_imovel"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="situacao_habitacional_has_one_imovel"
+	 src-table="&quot;Sociografia&quot;.imovel"
+	 dst-table="&quot;Sociografia&quot;.situacao_habitacional"/>
+
+<table name="saude" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1218.95" y="1636.53"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="sistema" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="observacao">
+		<type name="text"/>
+	</column>
+	<column name="doencas">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="medicamentos_continuo">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="local_tratamento">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="data_inicio_tratamento">
+		<type name="date"/>
+	</column>
+	<column name="frequencia_tratamento">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="nome_subst_psicoativa">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="frequencia">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="tempo_dependencia">
+		<type name="varchar" length="150"/>
+	</column>
+	<constraint name="saudo_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.saude">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="saude_has_one_individuo"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="saude_has_one_individuo"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.saude"/>
+
+<table name="cultura" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1713" y="1650.5"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="saude">
+		<type name="integer" length="10"/>
+	</column>
+	<column name="transporte">
+		<type name="integer"/>
+	</column>
+	<column name="lixo">
+		<type name="integer"/>
+	</column>
+	<column name="meio_ambiente">
+		<type name="integer"/>
+	</column>
+	<column name="saneamento">
+		<type name="integer"/>
+	</column>
+	<column name="agua_esgoto">
+		<type name="integer"/>
+	</column>
+	<column name="vias_publicas">
+		<type name="integer"/>
+	</column>
+	<column name="areas_publicas">
+		<type name="integer"/>
+	</column>
+	<column name="iluminacao">
+		<type name="integer"/>
+	</column>
+	<constraint name="cultura_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.cultura">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="cultura_has_one_individuo"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="cultura_has_one_individuo"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.cultura"/>
+
+<table name="situacao_financeira" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2053" y="1477.5"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="aluguel">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="financiamentos">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="alimentacao_higiene_limpeza">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="agua_esgoto">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="energia_eletrica">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="gas_carvao_lenha">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="saude_medicamentos">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="transporte">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="outros">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="total_despesas">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="total_rendimentos">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="renda_percapita">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="total_beneficios">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="saldo">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="beneficios">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<constraint name="situacao_financeira_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.situacao_financeira">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="situacao_financeira_has_one_individuo"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="situacao_financeira_has_one_individuo"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.situacao_financeira"/>
+
+<table name="atendimentos" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1453.5" y="710"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="unidade_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="operador_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="data">
+		<type name="date"/>
+	</column>
+	<column name="tipo" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="acao" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="parecer" not-null="true">
+		<type name="text"/>
+	</column>
+	<constraint name="atendimentos_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.atendimentos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="individuo_has_many_atendimentos"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_atendimentos"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.atendimentos"/>
+
+<relationship name="unidade_has_many_atendimentos"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="unidade_has_many_atendimentos"
+	 src-table="&quot;Sociografia&quot;.unidade"
+	 dst-table="&quot;Sociografia&quot;.atendimentos"/>
+
+<relationship name="operador_has_many_atendimentos"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="operador_has_many_atendimentos"
+	 src-table="&quot;Sociografia&quot;.operador"
+	 dst-table="&quot;Sociografia&quot;.atendimentos"/>
+
+<table name="beneficios" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="420.5" y="1263"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome">
+		<type name="varchar" length="255"/>
+	</column>
+	<constraint name="beneficios_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.beneficios">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="recebimento_beneficios" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="685" y="1144"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="beneficio_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="data_inclusao" not-null="true">
+		<type name="date"/>
+	</column>
+	<column name="data_exclusao">
+		<type name="date"/>
+	</column>
+	<column name="valor_recebido" not-null="true">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<constraint name="recebimento_beneficios_id_pf" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.recebimento_beneficios">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="beneficios_has_many_recebimento_beneficios"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="beneficios_has_many_recebimento_beneficios"
+	 src-table="&quot;Sociografia&quot;.beneficios"
+	 dst-table="&quot;Sociografia&quot;.recebimento_beneficios"/>
+
+<relationship name="individuo_has_many_recebimento_beneficios"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_recebimento_beneficios"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.recebimento_beneficios"/>
+
+<table name="referenciamento" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="685" y="1440.5"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="unidade_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="horario">
+		<type name="time"/>
+	</column>
+	<column name="data_referenciamento">
+		<type name="date"/>
+	</column>
+	<column name="assunto">
+		<type name="text"/>
+	</column>
+	<column name="operador_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="data_agendamento">
+		<type name="date"/>
+	</column>
+	<column name="contra_referenciamento">
+		<type name="char" length="3"/>
+	</column>
+	<column name="local_referenciamento_id" not-null="true">
+		<type name="integer"/>
+	</column>
+</table>
+
+<relationship name="individuo_has_many_referenciamento"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_referenciamento"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.referenciamento"/>
+
+<relationship name="operador_has_many_referenciamento"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="operador_has_many_referenciamento"
+	 src-table="&quot;Sociografia&quot;.operador"
+	 dst-table="&quot;Sociografia&quot;.referenciamento"/>
+
+<table name="fornecimento_recursos" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1105" y="1414.5"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="data_solicitacao">
+		<type name="date"/>
+	</column>
+	<column name="unidade_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="operador_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="recurso_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="fornecimento_recursos_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.fornecimento_recursos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="recursos" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1040" y="1949"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome">
+		<type name="varchar" length="255"/>
+	</column>
+	<column name="valor_unitario" not-null="true">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<constraint name="recursos_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.recursos">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="recursos_has_many_fornecimento_recursos"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="recursos_has_many_fornecimento_recursos"
+	 src-table="&quot;Sociografia&quot;.recursos"
+	 dst-table="&quot;Sociografia&quot;.fornecimento_recursos"/>
+
+<relationship name="individuo_has_many_fornecimento_recursos"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_fornecimento_recursos"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.fornecimento_recursos"/>
+
+<relationship name="fornecimento_recursos_has_one_unidade"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="fornecimento_recursos_has_one_unidade"
+	 src-table="&quot;Sociografia&quot;.unidade"
+	 dst-table="&quot;Sociografia&quot;.fornecimento_recursos"/>
+
+<table name="lista_espera" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2157" y="1196"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="item_esperado_id" not-null="true">
+		<type name="integer" length="255"/>
+	</column>
+	<column name="quantidade_solicitada" not-null="true">
+		<type name="decimal" length="50" precision="1"/>
+	</column>
+	<column name="valor_unitario" not-null="true">
+		<type name="numeric" length="255" precision="2"/>
+	</column>
+	<column name="data_inclusao" not-null="true">
+		<type name="date"/>
+	</column>
+	<column name="data_exclusao">
+		<type name="date"/>
+	</column>
+	<column name="individuo_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="lista_espera_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.lista_espera">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="individuo_has_many_lista_espera"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="individuo_has_many_lista_espera"
+	 src-table="&quot;Sociografia&quot;.individuo"
+	 dst-table="&quot;Sociografia&quot;.lista_espera"/>
+
+<table name="local_referenciamento" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="1082" y="1268"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<constraint name="local_referenciamento_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.local_referenciamento">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="local_referenciamento_has_many_referenciamento"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="local_referenciamento_has_many_referenciamento"
+	 src-table="&quot;Sociografia&quot;.local_referenciamento"
+	 dst-table="&quot;Sociografia&quot;.referenciamento"/>
+
+<relationship name="endereco_has_one_local_referenciamento"
+	 type="rel11"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="endereco_has_one_local_referenciamento"
+	 src-table="&quot;Sociografia&quot;.local_referenciamento"
+	 dst-table="&quot;Sociografia&quot;.endereco"/>
+
+<table name="item_esperado" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2533" y="992"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<constraint name="item_esperado_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.item_esperado">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="item_esperado_has_many_lista_espera"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="item_esperado_has_many_lista_espera"
+	 src-table="&quot;Sociografia&quot;.item_esperado"
+	 dst-table="&quot;Sociografia&quot;.lista_espera"/>
+
+<table name="protecao_especial_fatores" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2063" y="53"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="atendimento_especial_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="fatores_id" not-null="true">
+		<type name="integer"/>
+	</column>
+	<constraint name="protecao_especial_fatores_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.protecao_especial_fatores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="atendimento_especial_has_many_protecao_especial_fatores"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="atendimento_especial_has_many_protecao_especial_fatores"
+	 src-table="&quot;Sociografia&quot;.atendimento_especial"
+	 dst-table="&quot;Sociografia&quot;.protecao_especial_fatores"/>
+
+<table name="fatores" oids="true">
+	<schema name="&quot;Sociografia&quot;"/>
+	<position x="2569" y="58"/>
+	<column name="id" not-null="true">
+		<type name="bigserial"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="255"/>
+	</column>
+	<constraint name="fatores_id_pk" type="pk-constr" factor="10" table="&quot;Sociografia&quot;.fatores">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="fatores_has_many_protecao_especial_fatores"
+	 type="rel1n"
+	 src-required="true" dst-required="false"
+	 auto-sufix="true"
+	 table-name="fatores_has_many_protecao_especial_fatores"
+	 src-table="&quot;Sociografia&quot;.fatores"
+	 dst-table="&quot;Sociografia&quot;.protecao_especial_fatores"/>
+
+</dbmodel>
